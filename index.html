@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poll App Voting System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #007BFF, #00B4DB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .poll-form {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+
+        .poll-form input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .poll-form button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #007BFF, #00B4DB);
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .poll-form button:hover {
+            background: linear-gradient(to right, #005792, #007BFF);
+        }
+
+        h2 {
+            color: #005792;
+            margin-top: 40px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        li {
+            background: white;
+            margin-bottom: 10px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create a Poll</h1>
+
+    <div class="poll-form">
+        <form method="POST" action="/create">
+            <input type="text" name="question" placeholder="Poll Question" required>
+            <input type="text" name="option1" placeholder="Option 1" required>
+            <input type="text" name="option2" placeholder="Option 2" required>
+            <input type="text" name="option3" placeholder="Option 3" required>
+            <button type="submit">Create Poll</button>
+        </form>
+    </div>
+
+    <h2>Available Polls</h2>
+    <ul>
+        {% for poll_id, poll in polls.items() %}
+            <li><a href="/poll/{{ poll_id }}">{{ poll.question }}</a></li>
+        {% else %}
+            <li>No polls yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
